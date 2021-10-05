@@ -5,8 +5,8 @@ const Paint = function(litres){
 };
 
 
-Paint.prototype.emptyPaint = function(){
-    this.empty = true;
+Paint.prototype.emptyPaint = function(paint){
+    paint.empty = true;
 }
 
 

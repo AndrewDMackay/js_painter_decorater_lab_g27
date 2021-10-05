@@ -2,6 +2,7 @@ const Room = require("./room");
 
 const Decorator = function(){
     this.stock = [];
+    this.emptyPaint = [];
 };
 
 
@@ -63,16 +64,19 @@ Decorator.prototype.removePaintByName = function(paint){
 }
 
 
-Decorator.prototype.removeAllPaint = function(){
-    this.stock.splice(0, this.stock.length);
+Decorator.prototype.removeAllEmptyPaint = function(){
+    this.emptyPaint.splice(0, this.emptyPaint.length);
 }
 
 
-Decorator.prototype.removeEmptyPaint = function(){
-    
-}
-
-
+Decorator.prototype.sortEmptyPaint = function(){
+    for (paint of this.stock){
+        if (paint.empty === true){
+            this.emptyPaint.push(paint);
+    } else {
+        return 'There are no empty paint cans..'
+    }
+}}
 
 
 module.exports = Decorator;
@@ -89,4 +93,4 @@ module.exports = Decorator;
 // We want to avoid removing items from arrays while iterating over them.. 
 // This is because iteration uses the index number to access the current item.. 
 // And, if you remove an item during one of the iterations, the position of each of the following items will be changed.. 
-// And, lead to unexpected results.
+// And, lead to unexpected results..

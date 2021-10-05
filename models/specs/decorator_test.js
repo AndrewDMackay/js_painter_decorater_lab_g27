@@ -14,7 +14,7 @@ describe('Decorator', function(){
     beforeEach(function(){
         decorator = new Decorator();
         paint = new Paint(10)
-        emptyPaint = new Paint(10, true)
+        emptyPaint = new Paint(10)
         room = new Room(8)
     });
 
@@ -55,7 +55,7 @@ describe('Decorator', function(){
     // Extensions..
 
     it('should be able to decrease stock, if the room has been painted', function(){
-        decorator.addStock(paint)
+        decorator.addStock(paint);
         decorator.calculateTotalStock();
         decorator.calculateEnoughPaint(room);
         decorator.decoratorPaintsRoom(room);
@@ -63,10 +63,14 @@ describe('Decorator', function(){
         assert.strictEqual(actual, 2);
     });
 
-    it('should be able to remove empty paint cans from stock', function(){
-        decorator.addStock(emptyPaint)
-        const actual = decorator.stock;
-        assert.deepStrictEqual(actual, [])});
-    });
-})
+    it('should be able to remove empyt paint cans from stock', function(){
+        decorator.addStock(emptyPaint);
+        emptyPaint.emptyPaint(emptyPaint);
+        decorator.sortEmptyPaint();
+        decorator.removeAllEmptyPaint();
+        const expected = [];
+        const actual = decorator.emptyPaint;
+        assert.deepStrictEqual(actual, expected)
+    })
+});
 

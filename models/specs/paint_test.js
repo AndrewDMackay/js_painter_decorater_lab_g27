@@ -23,7 +23,7 @@ describe('Paint', function(){
     });
 
     it('should be able to be emptied', function(){
-        paint.emptyPaint()
+        paint.emptyPaint(paint)
         const actual = paint.empty;
         assert.strictEqual(actual, true);
     });

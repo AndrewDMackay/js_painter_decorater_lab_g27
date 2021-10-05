@@ -39,9 +39,40 @@ Decorator.prototype.decoratorPaintsRoom = function(room){
     if (enoughPaint === true && room.painted === false){
         room.paintRoom()
     } else {
-        return `This room has already been painted..`
+        return 'This room has already been painted..'
     }
 }
+
+
+// Extensions..
+
+Decorator.prototype.decreaseStock = function(room){
+    let totalStock = this.calculateTotalStock();
+    if (room.painted === true){
+        totalStock -= room.area
+        return totalStock
+    } else {
+        return 'The room has not been painted yet..'
+    }
+}
+
+
+Decorator.prototype.removePaintByName = function(paint){
+    const indexOfPaint = this.stock.indexOf(paint);
+    this.stock.splice(indexOfPaint, 1);
+}
+
+
+Decorator.prototype.removeAllPaint = function(){
+    this.stock.splice(0, this.stock.length);
+}
+
+
+Decorator.prototype.removeEmptyPaint = function(){
+    
+}
+
+
 
 
 module.exports = Decorator;
@@ -51,7 +82,6 @@ module.exports = Decorator;
 
 // A decorator should..
 
-// should be able to decrease amount of paint in stock when painting a room..
 // should be able to remove empty paint cans from stock..
 
 // Hint..

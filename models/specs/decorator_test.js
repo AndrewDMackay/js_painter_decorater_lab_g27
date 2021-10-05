@@ -7,15 +7,6 @@ const Paint = require('../paint.js');
 const Room = require('../room.js');
 
 
-// A decorator should..
-
-// start with an empty paint stock..
-// Be able to add a can of paint to paint stock..
-// Be able to calculate total litres paint it has in stock..
-// Be able to calculate whether is has enough paint to paint a room..
-// Be able to paint room if has enough paint in stock..
-
-
 describe('Decorator', function(){
 
     let decorator;
@@ -23,6 +14,7 @@ describe('Decorator', function(){
     beforeEach(function(){
         decorator = new Decorator();
         paint = new Paint(10)
+        emptyPaint = new Paint(10, true)
         room = new Room(8)
     });
 
@@ -44,7 +36,7 @@ describe('Decorator', function(){
         assert.strictEqual(actual, 10);
     });
 
-    it('should be able to calculate if there is enough paint to paint a room', function(){
+    it('should be able to calculate, if there is enough paint to paint a room', function(){
         decorator.addStock(paint)
         decorator.calculateTotalStock();
         const actual = decorator.calculateEnoughPaint(room);
@@ -59,4 +51,22 @@ describe('Decorator', function(){
         const actual = room.painted;
         assert.strictEqual(actual, true);
     });
+
+    // Extensions..
+
+    it('should be able to decrease stock, if the room has been painted', function(){
+        decorator.addStock(paint)
+        decorator.calculateTotalStock();
+        decorator.calculateEnoughPaint(room);
+        decorator.decoratorPaintsRoom(room);
+        const actual = decorator.decreaseStock(room);
+        assert.strictEqual(actual, 2);
+    });
+
+    it('should be able to remove empty paint cans from stock', function(){
+        decorator.addStock(emptyPaint)
+        const actual = decorator.stock;
+        assert.deepStrictEqual(actual, [])});
+    });
 })
+

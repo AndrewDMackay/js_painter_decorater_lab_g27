@@ -23,6 +23,7 @@ Decorator.prototype.calculateTotalStock = function(){
     return totalStock;
 }
 
+
 Decorator.prototype.calculateEnoughPaint = function(roomArea){
     let totalStock = this.calculateTotalStock;
     if (totalStock >= roomArea){
@@ -33,13 +34,29 @@ Decorator.prototype.calculateEnoughPaint = function(roomArea){
 }
 
 
+Decorator.prototype.decoratorPaintsRoom = function(room){
+    let enoughPaint = this.calculateEnoughPaint(room);
+    if (enoughPaint === true && room.painted === false){
+        room.paintRoom()
+    } else {
+        return `This room has already been painted..`
+    }
+}
+
+
 module.exports = Decorator;
 
 
+// Extensions
+
 // A decorator should..
 
-// start with an empty paint stock..
-// Be able to add a can of paint to paint stock..
-// Be able to calculate total litres paint it has in stock..
-// Be able to calculate whether is has enough paint to paint a room..
-// Be able to paint room if has enough paint in stock..
+// should be able to decrease amount of paint in stock when painting a room..
+// should be able to remove empty paint cans from stock..
+
+// Hint..
+
+// We want to avoid removing items from arrays while iterating over them.. 
+// This is because iteration uses the index number to access the current item.. 
+// And, if you remove an item during one of the iterations, the position of each of the following items will be changed.. 
+// And, lead to unexpected results.
